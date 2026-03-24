@@ -8,7 +8,7 @@ import java.util.Objects;
 public class LlistaAllotjaments implements InLlistaAllotjaments{
     private ArrayList<Allotjament> llistaAllotjaments;
 
-    public LlistaAllotjaments(ArrayList<Allotjament> llistaAllotjaments){
+    public LlistaAllotjaments(ArrayList<Allotjament> llistaAllotjaments){ //aixo cal???? ns perque ho he fet
         this.llistaAllotjaments = llistaAllotjaments;
     }
 
@@ -44,12 +44,17 @@ public class LlistaAllotjaments implements InLlistaAllotjaments{
      * @return String
      * @throws ExcepcioCamping Aquest mètode llança una excepció en cas que no hi hagi allotjaments en l'estat passat com a paràmetre.
      */
-
+    //NO ENTENC ESTE PERQUE ESTAT ES UN STRING A QUÈ CONY ES REFEREIX
     @Override
     public String llistarAllotjaments(String estat) throws ExcepcioCamping {
+        Iterator<Allotjament> it = llistaAllotjaments.iterator();
+        while(it.hasNext()) {
+            Allotjament a = it.next();
+
+        }
         return "";
 
-
+        //throw new ExcepcioCamping("No hi ha cap allotjament amb aquest estat");
     }
 
     /**
@@ -59,7 +64,14 @@ public class LlistaAllotjaments implements InLlistaAllotjaments{
      */
     @Override
     public boolean containsAllotjamentOperatiu() {
-        return true;
+        Iterator<Allotjament> it = llistaAllotjaments.iterator();
+        while(it.hasNext()) {
+            Allotjament a = it.next();
+            if (a.isOperatiu()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

@@ -136,4 +136,9 @@ public class TascaManteniment implements InTascaManteniment{
             case Desinfeccio -> "0%";
         };
     }
+
+    @Override
+    public String toString(){
+        return "Número: " + numero + ", Allotjament: " + allotjament + ", Data: " + data + ", Tipus: " + tipus + ", Dies per completar-la: " + diesPerCompletar;
+    }
 }

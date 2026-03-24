@@ -2,7 +2,15 @@ package prog2.model;
 
 import prog2.vista.ExcepcioCamping;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class LlistaAccessos implements InLlistaAccessos{
+    private ArrayList<Acces> llistaAccessos;
+
+    public LlistaAccessos(){
+        llistaAccessos = new ArrayList<>();
+    }
 
     /**
      * Afegeix un accés rebut per paràmetre a la llista d'accessos.
@@ -12,7 +20,7 @@ public class LlistaAccessos implements InLlistaAccessos{
      */
     @Override
     public void afegirAcces(Acces acc) throws ExcepcioCamping {
-
+        llistaAccessos.add(acc);
     }
 
     /**
@@ -20,7 +28,7 @@ public class LlistaAccessos implements InLlistaAccessos{
      */
     @Override
     public void buidar() {
-
+        llistaAccessos.clear();
     }
 
     /**
@@ -34,7 +42,19 @@ public class LlistaAccessos implements InLlistaAccessos{
      */
     @Override
     public String llistarAccessos(boolean estat) throws ExcepcioCamping {
-        return "";
+        Iterator<Acces> it = llistaAccessos.iterator();
+        StringBuilder resultat = new StringBuilder();
+        while(it.hasNext()) {
+            Acces a = it.next();
+            if(a.getEstat() == estat){
+                resultat.append(a.getNom()).append(" ");
+            }
+        }
+        if(resultat.isEmpty()){
+            throw new ExcepcioCamping("No hi ha cap accés amb aquest estat");
+        }
+
+        return resultat.toString();
     }
 
     /**
@@ -42,6 +62,7 @@ public class LlistaAccessos implements InLlistaAccessos{
      *
      * @throws ExcepcioCamping Aquest mètode podria llançar una excepció si fos necessari.
      */
+    //NO SÉ COM S'HA DE FER AQUEST
     @Override
     public void actualitzaEstatAccessos() throws ExcepcioCamping {
 
@@ -55,7 +76,15 @@ public class LlistaAccessos implements InLlistaAccessos{
      */
     @Override
     public int calculaAccessosNoAccessibles() throws ExcepcioCamping {
-        return 0;
+        Iterator<Acces> it = llistaAccessos.iterator();
+        int comptador = 0;
+        while(it.hasNext()) {
+            Acces a = it.next();
+            if(!a.isAccessibilitat()){
+                comptador++;
+            }
+        }
+        return comptador;
     }
 
     /**
@@ -66,6 +95,14 @@ public class LlistaAccessos implements InLlistaAccessos{
      */
     @Override
     public float calculaMetresTerra() throws ExcepcioCamping {
-        return 0;
+        Iterator<Acces> it = llistaAccessos.iterator();
+        float metresTotals = 0;
+        while(it.hasNext()) {
+            Acces a = it.next();
+            if(a instanceof AccesTerra){
+                metresTotals += ((AccesTerra) a).getLongitud();
+            }
+        }
+        return metresTotals;
     }
 }

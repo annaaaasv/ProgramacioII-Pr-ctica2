@@ -8,6 +8,14 @@ public abstract class AccesAsfalt extends Acces{
         this.metres = metres;
     }
 
+    public float getMetres() {
+        return metres;
+    }
+
+    public void setMetres(float metres) {
+        this.metres = metres;
+    }
+
     @Override
     public String toString(){
         return super.toString() + ", Metres: " + metres;
