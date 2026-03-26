@@ -14,7 +14,7 @@ public class Menu<TEnum> {
      /**
      * Llista de les opcions
      */
-    TEnum[] _llistaOpcions=null;
+    TEnum[] _llistaOpcions= null;
 
     /**
      * Títol del menú

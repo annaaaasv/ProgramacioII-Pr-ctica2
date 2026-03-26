@@ -69,12 +69,14 @@ public class LlistaTasquesManteniment implements InLlistaTasquesManteniment{
         if(llistaTasquesManteniment.isEmpty()){
             throw new ExcepcioCamping("No hi ha cap tasca de manteniment");
         }
+        StringBuilder resultat = new StringBuilder();
         Iterator<TascaManteniment> it = llistaTasquesManteniment.iterator();
         while(it.hasNext()) {
             TascaManteniment t = it.next();
+            resultat.append(t.toString());
 
         }
-        return "";
+        return resultat.toString();
     }
 
     /**

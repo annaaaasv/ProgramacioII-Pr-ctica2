@@ -44,17 +44,23 @@ public class LlistaAllotjaments implements InLlistaAllotjaments{
      * @return String
      * @throws ExcepcioCamping Aquest mètode llança una excepció en cas que no hi hagi allotjaments en l'estat passat com a paràmetre.
      */
-    //NO ENTENC ESTE PERQUE ESTAT ES UN STRING A QUÈ CONY ES REFEREIX
+    //NO ENTENC ESTE PERQUE ESTAT ES UN STRING A QUÈ CONY ES REFEREIX, a operatiu/no operatiu
     @Override
     public String llistarAllotjaments(String estat) throws ExcepcioCamping {
         Iterator<Allotjament> it = llistaAllotjaments.iterator();
+        StringBuilder resultat = new StringBuilder();
         while(it.hasNext()) {
             Allotjament a = it.next();
+            if((estat.equalsIgnoreCase("Operatiu")&&a.isOperatiu()) || estat.equalsIgnoreCase("No operatiu")&&!a.isOperatiu()){
+                resultat.append(a.toString()); //no detectta el toString com si fos un metode de Allotjament???????
+            }
 
         }
-        return "";
+        if(resultat.isEmpty()){
+            throw new ExcepcioCamping("No hi ha cap allotjament amb aquest estat");
+        }
 
-        //throw new ExcepcioCamping("No hi ha cap allotjament amb aquest estat");
+        return resultat.toString();
     }
 
     /**

@@ -19,7 +19,7 @@ public class LlistaAccessos implements InLlistaAccessos{
      * @throws ExcepcioCamping Aquest mètode podria llançar una excepció si fos necessari.
      */
     @Override
-    public void afegirAcces(Acces acc) throws ExcepcioCamping {
+    public void afegirAcces(Acces acc){// throws ExcepcioCamping
         llistaAccessos.add(acc);
     }
 
@@ -75,7 +75,7 @@ public class LlistaAccessos implements InLlistaAccessos{
      * @throws ExcepcioCamping Aquest mètode podria llançar una excepció si fos necessari.
      */
     @Override
-    public int calculaAccessosNoAccessibles() throws ExcepcioCamping {
+    public int calculaAccessosNoAccessibles() {//throws ExcepcioCamping
         Iterator<Acces> it = llistaAccessos.iterator();
         int comptador = 0;
         while(it.hasNext()) {
@@ -94,7 +94,7 @@ public class LlistaAccessos implements InLlistaAccessos{
      * @throws ExcepcioCamping Aquest mètode podria llançar una excepció si fos necessari.
      */
     @Override
-    public float calculaMetresTerra() throws ExcepcioCamping {
+    public float calculaMetresTerra(){// throws ExcepcioCamping
         Iterator<Acces> it = llistaAccessos.iterator();
         float metresTotals = 0;
         while(it.hasNext()) {

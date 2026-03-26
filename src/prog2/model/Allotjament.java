@@ -3,16 +3,12 @@ package prog2.model;
 public abstract class Allotjament implements InAllotjament{
     private String nom;
     private String idAllotjament;
-    private long estadaMinimaALTA;
-    private long estadaMinimaBAIXA;
     private boolean operatiu;
     private String iluminacio;
 
-    public Allotjament(String nom, String idAllotjament, long estadaMinimaALTA, long estadaMinimaBAIXA, boolean operatiu, String iluminacio){
+    public Allotjament(String nom, String idAllotjament, boolean operatiu, String iluminacio){
         this.nom = nom;
         this.idAllotjament = idAllotjament;
-        this.estadaMinimaALTA = estadaMinimaALTA;
-        this.estadaMinimaBAIXA = estadaMinimaBAIXA;
         this.operatiu = operatiu;
         this.iluminacio = iluminacio;
 
@@ -37,20 +33,6 @@ public abstract class Allotjament implements InAllotjament{
     public void setId(String idAllotjament) {
         this.idAllotjament = idAllotjament;
     }
-    /** {@inheritDoc} */
-    @Override
-    public long getEstadaMinima(Temp temp) {
-        if(temp == Temp.BAIXA)
-            return estadaMinimaBAIXA;
-        else
-            return estadaMinimaALTA;
-    }
-    /** {@inheritDoc} */
-    @Override
-    public void setEstadaMinima(long estadaMinimaALTA_, long estadaMinimaBAIXA_) {
-        estadaMinimaALTA = estadaMinimaALTA_;
-        estadaMinimaBAIXA = estadaMinimaBAIXA_;
-    }
 
     public void setOperatiu(boolean operatiu){
         this.operatiu = operatiu;
@@ -70,8 +52,7 @@ public abstract class Allotjament implements InAllotjament{
 
     @Override
     public String toString(){
-        return "Nom=" + nom + ", Id=" + idAllotjament+ ", estada mínima en temp ALTA: " + estadaMinimaALTA +
-                ", estada mínima en temp BAIXA: " + estadaMinimaBAIXA + ".";
+        return "Nom: " + nom + ", Id: " + idAllotjament + ", Operatiu: " + operatiu + ", Il·luminació: " + iluminacio;
     }
 
     /**
