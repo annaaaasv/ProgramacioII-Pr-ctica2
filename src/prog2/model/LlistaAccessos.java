@@ -48,11 +48,14 @@ public class LlistaAccessos implements InLlistaAccessos, Serializable {
         while(it.hasNext()) {
             Acces a = it.next();
             if(a.getEstat() == estat){
-                resultat.append(a.getNom()).append(" ");
+                resultat.append(a.getNom());
+                if(it.hasNext()){
+                    resultat.append(", ");
+                }
             }
         }
         if(resultat.isEmpty()){
-            throw new ExcepcioCamping("No hi ha cap accés amb aquest estat");
+            throw new ExcepcioCamping("No hi ha cap accés en aquest estat");
         }
 
         return resultat.toString();

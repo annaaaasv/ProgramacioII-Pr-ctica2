@@ -75,8 +75,11 @@ public class LlistaTasquesManteniment implements InLlistaTasquesManteniment, Ser
         Iterator<TascaManteniment> it = llistaTasquesManteniment.iterator();
         while(it.hasNext()) {
             TascaManteniment t = it.next();
-            resultat.append(t.toString());
-
+            int numero = t.getNum();
+            resultat.append(numero);
+            if(it.hasNext()){
+                resultat.append(", ");
+            }
         }
         return resultat.toString();
     }

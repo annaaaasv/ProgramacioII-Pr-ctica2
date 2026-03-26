@@ -49,8 +49,12 @@ public class LlistaAllotjaments implements InLlistaAllotjaments, Serializable {
         StringBuilder resultat = new StringBuilder();
         while(it.hasNext()) {
             Allotjament a = it.next();
-            resultat.append(a.toString()); //no detecta el toString com si fos un metode de Allotjament???????
+            String nom = a.getNom();
+            resultat.append(nom);
+            if(it.hasNext()){
+                resultat.append(", ");
             }
+        }
 
         return resultat.toString();
     }
@@ -70,12 +74,16 @@ public class LlistaAllotjaments implements InLlistaAllotjaments, Serializable {
         while(it.hasNext()) {
             Allotjament a = it.next();
             if((estat.equalsIgnoreCase("Operatiu")&&a.isOperatiu()) || estat.equalsIgnoreCase("No operatiu")&&!a.isOperatiu()){
-                resultat.append(a.toString()); //no detecta el toString com si fos un metode de Allotjament???????
+                String nom = a.getNom();
+                resultat.append(nom);
+                if(it.hasNext()){
+                    resultat.append(", ");
+                }
             }
 
         }
         if(resultat.isEmpty()){
-            throw new ExcepcioCamping("No hi ha cap allotjament amb aquest estat");
+            throw new ExcepcioCamping("No hi ha cap allotjament en aquest estat");
         }
 
         return resultat.toString();
@@ -129,4 +137,5 @@ public class LlistaAllotjaments implements InLlistaAllotjaments, Serializable {
         throw new ExcepcioCamping("No existeix l'allotjament amb id " + id);
 
     }
+
 }

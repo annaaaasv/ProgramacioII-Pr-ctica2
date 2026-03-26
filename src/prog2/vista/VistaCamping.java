@@ -47,11 +47,11 @@ public class VistaCamping {
                         break;
                     case LLISTAR_ACC_O:
                         System.out.println("Llista d'accessos oberts: ");
-                        System.out.println(camping.llistarAccessos("Operatiu"));
+                        System.out.println(camping.llistarAccessos("Obert"));
                         break;
                     case LLISTAR_ACC_T:
                         System.out.println("Llista d'accessos tancats: ");
-                        System.out.println(camping.llistarAccessos("No operatiu"));
+                        System.out.println(camping.llistarAccessos("Tancat"));
                         break;
                     case LLISTAR_TM_A:
                         System.out.println("Llista de tasques de manteniment actives: ");
@@ -61,6 +61,7 @@ public class VistaCamping {
                         System.out.println("Quina tasca de manteniment vols afegir? ");
                         System.out.println("Número: ");
                         int numero = sc.nextInt();
+                        sc.nextLine();
                         System.out.println("Tipus: ");
                         String tipus = sc.nextLine();
                         System.out.println("idAllotjament: ");
@@ -69,6 +70,7 @@ public class VistaCamping {
                         String data = sc.nextLine();
                         System.out.println("Dies: ");
                         int dies = sc.nextInt();
+                        sc.nextLine();
 
                         camping.afegirTascaManteniment(numero, tipus, idAllotjament, data, dies);
                         break;
@@ -80,11 +82,11 @@ public class VistaCamping {
                         break;
                     case NUM_ACC_NO_VEH:
                         System.out.println("Número total d'accessos que NO proporcionen accessibilitat amb vehicle");
-                        camping.calculaAccessosNoAccessibles();
+                        System.out.println(camping.calculaAccessosNoAccessibles());
                         break;
                     case NUM_METRES_AT:
                         System.out.println("Número total de metres dels accessos de terra");
-                        camping.calculaMetresTerra();
+                        System.out.println(camping.calculaMetresTerra());
                         break;
                     case GUARDAR_CAMP:
                         System.out.println("Cami destí: ");
