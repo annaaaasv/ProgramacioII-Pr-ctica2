@@ -1,6 +1,8 @@
 package prog2.model;
 
-public abstract class Acces implements InAcces{
+import java.io.Serializable;
+
+public abstract class Acces implements InAcces, Serializable {
     private String nom;
     private boolean accessibilitat;
     private boolean estat;

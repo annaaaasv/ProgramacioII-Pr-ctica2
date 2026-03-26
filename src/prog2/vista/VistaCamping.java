@@ -47,23 +47,36 @@ public class VistaCamping {
                         break;
                     case LLISTAR_ACC_O:
                         System.out.println("Llista d'accessos oberts: ");
-                        System.out.println(camping.llistarAccessos(""));
+                        System.out.println(camping.llistarAccessos("Operatiu"));
                         break;
                     case LLISTAR_ACC_T:
                         System.out.println("Llista d'accessos tancats: ");
-                        System.out.println(camping.llistarAccessos(""));
+                        System.out.println(camping.llistarAccessos("No operatiu"));
                         break;
                     case LLISTAR_TM_A:
                         System.out.println("Llista de tasques de manteniment actives: ");
                         System.out.println(camping.llistarTasquesManteniment());
                         break;
                     case AFEGIR_TM:
-                        System.out.println("");
-                        //camping.afegirTascaManteniment();
+                        System.out.println("Quina tasca de manteniment vols afegir? ");
+                        System.out.println("Número: ");
+                        int numero = sc.nextInt();
+                        System.out.println("Tipus: ");
+                        String tipus = sc.nextLine();
+                        System.out.println("idAllotjament: ");
+                        String idAllotjament = sc.nextLine();
+                        System.out.println("Data: (dd/mm/aaaa) ");
+                        String data = sc.nextLine();
+                        System.out.println("Dies: ");
+                        int dies = sc.nextInt();
+
+                        camping.afegirTascaManteniment(numero, tipus, idAllotjament, data, dies);
                         break;
                     case COMPLETAR_TM:
-                        System.out.println("");
-                        //camping.completarTascaManteniment();
+                        System.out.println("Quina tasca de manteniment vols completar? ");
+                        System.out.println("Número: ");
+                        int num = sc.nextInt();
+                        camping.completarTascaManteniment(num);
                         break;
                     case NUM_ACC_NO_VEH:
                         System.out.println("Número total d'accessos que NO proporcionen accessibilitat amb vehicle");
@@ -74,10 +87,15 @@ public class VistaCamping {
                         camping.calculaMetresTerra();
                         break;
                     case GUARDAR_CAMP:
+                        System.out.println("Cami destí: ");
+                        String camiDesti = sc.nextLine();
+                        camping.save(camiDesti);
                         System.out.println("Guardant càmping");
-                        camping.save("");
                         break;
                     case REC_CAMP:
+                        System.out.println("Camí origen: ");
+                        String camiOrigen = sc.nextLine();
+                        Camping.load(camiOrigen);
                         System.out.println("Recuperant càmping");
                         break;
                     case SORTIR:

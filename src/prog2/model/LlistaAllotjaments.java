@@ -1,11 +1,13 @@
 package prog2.model;
 
 import prog2.vista.ExcepcioCamping;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Objects;
 
-public class LlistaAllotjaments implements InLlistaAllotjaments{
+public class LlistaAllotjaments implements InLlistaAllotjaments, Serializable {
     private ArrayList<Allotjament> llistaAllotjaments;
 
     public LlistaAllotjaments(ArrayList<Allotjament> llistaAllotjaments){ //aixo cal???? ns perque ho he fet
@@ -22,7 +24,7 @@ public class LlistaAllotjaments implements InLlistaAllotjaments{
      * @param allotjament Objecte de tipus Allotjament
      * @throws ExcepcioCamping Aquest mètode podria llançar una excepció si fos necessari.
      */
-    //QUINA EXCEPCIÓ LLANÇA?
+
     @Override
     public void afegirAllotjament(Allotjament allotjament){ // throws ExcepcioCamping
         llistaAllotjaments.add(allotjament);
@@ -37,6 +39,23 @@ public class LlistaAllotjaments implements InLlistaAllotjaments{
     }
 
     /**
+     * Llista tots els allotjaments.
+     *
+     * @return String
+     * @throws ExcepcioCamping
+     */
+    public String llistarAllotjaments() {
+        Iterator<Allotjament> it = llistaAllotjaments.iterator();
+        StringBuilder resultat = new StringBuilder();
+        while(it.hasNext()) {
+            Allotjament a = it.next();
+            resultat.append(a.toString()); //no detecta el toString com si fos un metode de Allotjament???????
+            }
+
+        return resultat.toString();
+    }
+
+    /**
      * Itera sobre la llista d'allotjaments i retorna un String amb la informació de tots els allotjaments amb l'estat rebut per paràmetre.
      * En cas que no hi hagi allotjaments en l'estat passat com a paràmetre llança una excepció.
      *
@@ -44,7 +63,6 @@ public class LlistaAllotjaments implements InLlistaAllotjaments{
      * @return String
      * @throws ExcepcioCamping Aquest mètode llança una excepció en cas que no hi hagi allotjaments en l'estat passat com a paràmetre.
      */
-    //NO ENTENC ESTE PERQUE ESTAT ES UN STRING A QUÈ CONY ES REFEREIX, a operatiu/no operatiu
     @Override
     public String llistarAllotjaments(String estat) throws ExcepcioCamping {
         Iterator<Allotjament> it = llistaAllotjaments.iterator();
@@ -52,7 +70,7 @@ public class LlistaAllotjaments implements InLlistaAllotjaments{
         while(it.hasNext()) {
             Allotjament a = it.next();
             if((estat.equalsIgnoreCase("Operatiu")&&a.isOperatiu()) || estat.equalsIgnoreCase("No operatiu")&&!a.isOperatiu()){
-                resultat.append(a.toString()); //no detectta el toString com si fos un metode de Allotjament???????
+                resultat.append(a.toString()); //no detecta el toString com si fos un metode de Allotjament???????
             }
 
         }
@@ -86,7 +104,6 @@ public class LlistaAllotjaments implements InLlistaAllotjaments{
      * @param allotjament
      * @return boolean
      */
-    //s'ha de fer amb iterador o es pot fer aixi i ya????
     @Override
     public boolean contains(Allotjament allotjament) {
         return llistaAllotjaments.contains(allotjament);

@@ -2,15 +2,17 @@ package prog2.model;
 
 import prog2.vista.ExcepcioCamping;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class LlistaTasquesManteniment implements InLlistaTasquesManteniment{
+public class LlistaTasquesManteniment implements InLlistaTasquesManteniment, Serializable {
     private ArrayList<TascaManteniment> llistaTasquesManteniment;
 
-    public LlistaTasquesManteniment(ArrayList<TascaManteniment> llistaTasquesManteniment){
-        this.llistaTasquesManteniment = llistaTasquesManteniment;
+    public LlistaTasquesManteniment(){
+        this.llistaTasquesManteniment = new ArrayList<>();
     }
+
 
     /**
      * Aquest mètode crea una tasca de manteniment amb la informació passada com a paràmetres

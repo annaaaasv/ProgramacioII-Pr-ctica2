@@ -2,10 +2,7 @@ package prog2.model;
 
 import prog2.vista.ExcepcioCamping;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Objects;
+import java.io.*;
 
 /**
  *
@@ -22,7 +19,7 @@ public class Camping implements InCamping, Serializable {
         nomCamping = nom;
         this.llistaAllotjaments = new LlistaAllotjaments();
         this.llistaAccessos = new LlistaAccessos();
-        //this.llistaTasquesManteniment = new LlistaTasquesManteniment(); //que faig amb aixo
+        this.llistaTasquesManteniment = new LlistaTasquesManteniment(); 
 
     }
 
@@ -43,7 +40,7 @@ public class Camping implements InCamping, Serializable {
      * @throws ExcepcioCamping
      */
     public String llistarAllotjaments() {
-        return llistaAllotjaments.toString();
+        return llistaAllotjaments.llistarAllotjaments();
     }
 
     /**
@@ -55,6 +52,7 @@ public class Camping implements InCamping, Serializable {
      */
     @Override
     public String llistarAllotjaments(String estat) throws ExcepcioCamping {
+
         return llistaAllotjaments.llistarAllotjaments(estat);
     }
 
@@ -67,7 +65,14 @@ public class Camping implements InCamping, Serializable {
      */
     @Override
     public String llistarAccessos(String infoEstat) throws ExcepcioCamping {
-        return llistaAccessos.toString();
+        boolean estat = false;
+        if(infoEstat.equals("Obert")){
+            estat = true;
+        }
+        else if(infoEstat.equals("Tancat")){
+            estat = false;
+        }
+        return llistaAccessos.llistarAccessos(estat);
     }
 
     /**
@@ -78,7 +83,7 @@ public class Camping implements InCamping, Serializable {
      */
     @Override
     public String llistarTasquesManteniment() throws ExcepcioCamping {
-        return llistaTasquesManteniment.toString();
+        return llistaTasquesManteniment.llistarTasquesManteniment();
     }
 
     /**
@@ -93,7 +98,16 @@ public class Camping implements InCamping, Serializable {
      */
     @Override
     public void afegirTascaManteniment(int num, String tipus, String idAllotjament, String data, int dies) throws ExcepcioCamping {
+        Allotjament allotjament = llistaAllotjaments.getAllotjament(idAllotjament);
 
+        if(allotjament == null){
+            throw new ExcepcioCamping("No existeix un allotjament amb aquest id");
+        }
+        try {
+            llistaTasquesManteniment.afegirTascaManteniment(num, tipus, allotjament, data, dies);
+        }catch(ExcepcioCamping e){
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -104,7 +118,15 @@ public class Camping implements InCamping, Serializable {
      */
     @Override
     public void completarTascaManteniment(int num) throws ExcepcioCamping {
-
+        TascaManteniment tasca = llistaTasquesManteniment.getTascaManteniment(num);
+        if(tasca == null){
+            throw new ExcepcioCamping("No existeix cap tasca amb aquest número");
+        }
+        try {
+            llistaTasquesManteniment.completarTascaManteniment(tasca);
+        }catch(ExcepcioCamping e){
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -135,7 +157,40 @@ public class Camping implements InCamping, Serializable {
      */
     @Override
     public void save(String camiDesti) throws ExcepcioCamping {
+        try {
+            FileOutputStream file = new FileOutputStream(camiDesti);
+            ObjectOutputStream out = new ObjectOutputStream(file);
 
+            out.writeObject(this); // guardem TOT el camping
+
+            out.close();
+            file.close();
+
+        } catch (IOException e) {
+            throw new ExcepcioCamping("Error en guardar el fitxer: " + e.getMessage());
+        }
+    }
+    /**
+     * Carrega l'estat d'un càmping des d'un fitxer.
+     * @param camiOrigen Ruta del fitxer d'origen.
+     * @return Una instància de la classe Camping carregada des del fitxer.
+     * @throws ExcepcioCamping
+     */
+    public static Camping load(String camiOrigen) throws ExcepcioCamping {
+        try {
+            FileInputStream file = new FileInputStream(camiOrigen);
+            ObjectInputStream in = new ObjectInputStream(file);
+
+            Camping camping = (Camping) in.readObject();
+
+            in.close();
+            file.close();
+
+            return camping;
+
+        } catch (IOException | ClassNotFoundException e) {
+            throw new ExcepcioCamping("Error en carregar el fitxer: " + e.getMessage());
+        }
     }
 
     /**
@@ -300,6 +355,6 @@ public class Camping implements InCamping, Serializable {
 
     }
 
-    }
+}
 
 
