@@ -12,7 +12,6 @@ public class VistaCamping {
         camping.inicialitzaDadesCamping();
     }
 
-
     public void gestioCamping(){
         Scanner sc = new Scanner(System.in);
         enum OpcionsMenu {LLISTAR_ALL, LLISTAR_ALL_OP, LLISTAR_ALL_NOP, LLISTAR_ACC_O, LLISTAR_ACC_T, LLISTAR_TM_A,
@@ -81,11 +80,11 @@ public class VistaCamping {
                         camping.completarTascaManteniment(num);
                         break;
                     case NUM_ACC_NO_VEH:
-                        System.out.println("Número total d'accessos que NO proporcionen accessibilitat amb vehicle");
+                        System.out.println("Número total d'accessos que NO proporcionen accessibilitat amb vehicle: ");
                         System.out.println(camping.calculaAccessosNoAccessibles());
                         break;
                     case NUM_METRES_AT:
-                        System.out.println("Número total de metres dels accessos de terra");
+                        System.out.println("Número total de metres dels accessos de terra: ");
                         System.out.println(camping.calculaMetresTerra());
                         break;
                     case GUARDAR_CAMP:

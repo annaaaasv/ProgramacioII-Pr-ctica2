@@ -103,6 +103,15 @@ public class Camping implements InCamping, Serializable {
         if(allotjament == null){
             throw new ExcepcioCamping("No existeix un allotjament amb aquest id");
         }
+        else if(!tipus.equals("Neteja") && !tipus.equals("Reparació") && !tipus.equals("RevisioTecnica") && !tipus.equals("Desinfeccio")){
+            throw new ExcepcioCamping("Tipus de tasca de manteniment no vàlid");
+        }
+        else if(dies < 0){
+            throw new ExcepcioCamping("Els dies per completar la tasca no poden ser negatius");
+        }
+        /*else if(){
+            throw new ExcepcioCamping("Data invàlida"); //controlar si la data es correcta?????????
+        }*/
         try {
             llistaTasquesManteniment.afegirTascaManteniment(num, tipus, allotjament, data, dies);
         }catch(ExcepcioCamping e){
