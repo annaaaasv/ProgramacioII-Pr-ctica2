@@ -1,6 +1,5 @@
 package prog2.model;
 
-import java.io.Serial;
 import java.io.Serializable;
 
 public class TascaManteniment implements InTascaManteniment, Serializable {

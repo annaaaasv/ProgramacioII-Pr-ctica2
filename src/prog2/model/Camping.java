@@ -3,6 +3,9 @@ package prog2.model;
 import prog2.vista.ExcepcioCamping;
 
 import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  *
@@ -21,6 +24,18 @@ public class Camping implements InCamping, Serializable {
         this.llistaAccessos = new LlistaAccessos();
         this.llistaTasquesManteniment = new LlistaTasquesManteniment(); 
 
+    }
+
+    //Obté la temporada en la qual es troba una data
+    public static InAllotjament.Temp getTemporada(LocalDate data){
+        int dia = data.getDayOfMonth();
+        int mes = data.getMonthValue();
+        if ((mes > 3 && mes < 9) ||
+                (mes == 3 && dia >= 21) ||
+                (mes == 9 && dia <= 20)) {
+            return InAllotjament.Temp.ALTA;
+        }
+        return InAllotjament.Temp.BAIXA;
     }
 
     /**
@@ -110,15 +125,20 @@ public class Camping implements InCamping, Serializable {
         else if(dies < 0){
             throw new ExcepcioCamping("Els dies per completar la tasca no poden ser negatius");
         }
-        /*else if(){
-            throw new ExcepcioCamping("Data invàlida"); //controlar si la data es correcta?????????
-        }*/
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dataConvertida;
+
         try {
-            llistaTasquesManteniment.afegirTascaManteniment(num, tipus, allotjament, data, dies);
-            llistaAccessos.actualitzaEstatAccessos();
-        }catch(ExcepcioCamping e){
-            System.out.println(e.getMessage());
+            dataConvertida = LocalDate.parse(data, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ExcepcioCamping("Data incorrecta");
         }
+        String dataString = dataConvertida.format(formatter);
+
+        llistaTasquesManteniment.afegirTascaManteniment(num, tipus, allotjament, dataString, dies);
+        llistaAccessos.actualitzaEstatAccessos();
+
     }
 
     /**

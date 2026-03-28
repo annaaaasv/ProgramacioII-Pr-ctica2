@@ -5,12 +5,16 @@ import java.io.Serializable;
 public abstract class Allotjament implements InAllotjament, Serializable {
     private String nom;
     private String idAllotjament;
+    private long estadaMinimaALTA;
+    private long estadaMinimaBAIXA;
     private boolean operatiu;
     private String iluminacio;
 
-    public Allotjament(String nom, String idAllotjament, boolean operatiu, String iluminacio){
+    public Allotjament(String nom, String idAllotjament, long estadaMinimaALTA, long estadaMinimaBAIXA, boolean operatiu, String iluminacio){
         this.nom = nom;
         this.idAllotjament = idAllotjament;
+        this.estadaMinimaALTA = estadaMinimaALTA;
+        this.estadaMinimaBAIXA = estadaMinimaBAIXA;
         this.operatiu = operatiu;
         this.iluminacio = iluminacio;
 
@@ -50,6 +54,20 @@ public abstract class Allotjament implements InAllotjament, Serializable {
 
     public String getIluminacio(){
         return iluminacio;
+    }
+
+    @Override
+    public long getEstadaMinima(Temp temp) {
+        if(temp == Temp.BAIXA)
+            return estadaMinimaBAIXA;
+        else
+            return estadaMinimaALTA;
+    }
+    /** {@inheritDoc} */
+    @Override
+    public void setEstadaMinima(long estadaMinimaALTA_, long estadaMinimaBAIXA_) {
+        estadaMinimaALTA = estadaMinimaALTA_;
+        estadaMinimaBAIXA = estadaMinimaBAIXA_;
     }
 
     @Override

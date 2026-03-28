@@ -95,7 +95,7 @@ public class LlistaAccessos implements InLlistaAccessos, Serializable {
      * @throws ExcepcioCamping Aquest mètode podria llançar una excepció si fos necessari.
      */
     @Override
-    public int calculaAccessosNoAccessibles() {//throws ExcepcioCamping
+    public int calculaAccessosNoAccessibles() {
         Iterator<Acces> it = llistaAccessos.iterator();
         int comptador = 0;
         while(it.hasNext()) {
@@ -114,7 +114,7 @@ public class LlistaAccessos implements InLlistaAccessos, Serializable {
      * @throws ExcepcioCamping Aquest mètode podria llançar una excepció si fos necessari.
      */
     @Override
-    public float calculaMetresTerra(){// throws ExcepcioCamping
+    public float calculaMetresTerra(){
         Iterator<Acces> it = llistaAccessos.iterator();
         float metresTotals = 0;
         while(it.hasNext()) {

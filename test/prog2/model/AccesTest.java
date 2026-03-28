@@ -39,4 +39,41 @@ public class AccesTest {
         assertFalse(acces2.getEstat());
         assertTrue(acces1.getAllotjaments() instanceof LlistaAllotjaments);
     }
+
+    @Test
+    void testTancarAcces() {
+        acces1.tancarAcces();
+        assertFalse(acces1.getEstat());
+    }
+
+    @Test
+    void testObrirAcces() {
+        acces2.obrirAcces();
+        assertTrue(acces2.getEstat());
+    }
+
+    @Test
+    void testAfegirAllotjaments() {
+        Allotjament allotjament = new Parcela("Allotjament Test", "ID001", true, "100%", 64.0f, true);
+
+        acces1.afegirAllotjament(allotjament);
+
+        assertEquals(1, acces1.getAllotjaments().getNumElements());
+    }
+
+    @Test
+    void testAfegirDiversosAllotjaments() {
+        Allotjament a1 = new Parcela("A1", "ID1", true, "100%", 64.0f, true);
+        Allotjament a2 = new Parcela("A2", "ID2", true, "100%", 64.0f, true);
+
+        acces1.afegirAllotjament(a1);
+        acces1.afegirAllotjament(a2);
+
+        assertEquals(2, acces1.getAllotjaments().getNumElements());
+    }
+
+    @Test
+    void testGetAllotjamentsNoNull() {
+        assertNotNull(acces1.getAllotjaments());
+    }
 }

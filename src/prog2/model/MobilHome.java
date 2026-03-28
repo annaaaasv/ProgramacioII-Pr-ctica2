@@ -6,7 +6,7 @@ public class MobilHome extends Casa{
 
     public MobilHome(String nom, String idAllotjament, boolean operatiu, String iluminacio, float mida, int habitacions, int placesPersones,
                      boolean terrassaBarbacoa) {
-        super(nom, idAllotjament, true, "100%", mida, habitacions, placesPersones);
+        super(nom, idAllotjament, 3, 5,true, "100%", mida, habitacions, placesPersones);
         this.terrassaBarbacoa = terrassaBarbacoa;
 
     }

@@ -11,7 +11,7 @@ public abstract class Acces implements InAcces, Serializable {
     public Acces(String nom, boolean estat){
         this.nom = nom;
         this.accessibilitat = isAccessibilitat();
-        this.estat = true;
+        this.estat = estat;
         this.llistaAllotjaments = new LlistaAllotjaments();
     }
 

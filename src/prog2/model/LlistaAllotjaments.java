@@ -11,10 +11,6 @@ public class LlistaAllotjaments implements InLlistaAllotjaments, Serializable {
     private ArrayList<Allotjament> llistaAllotjaments;
     private int numElements;
 
-    public LlistaAllotjaments(ArrayList<Allotjament> llistaAllotjaments){ //aixo cal???? ns perque ho he fet
-        this.llistaAllotjaments = llistaAllotjaments;
-    }
-
     public LlistaAllotjaments() {
         llistaAllotjaments = new ArrayList<>();
         numElements = 0;
@@ -36,7 +32,7 @@ public class LlistaAllotjaments implements InLlistaAllotjaments, Serializable {
      */
 
     @Override
-    public void afegirAllotjament(Allotjament allotjament){ // throws ExcepcioCamping
+    public void afegirAllotjament(Allotjament allotjament){
         llistaAllotjaments.add(allotjament);
         numElements++;
     }
