@@ -9,6 +9,7 @@ import java.util.Objects;
 
 public class LlistaAllotjaments implements InLlistaAllotjaments, Serializable {
     private ArrayList<Allotjament> llistaAllotjaments;
+    private int numElements;
 
     public LlistaAllotjaments(ArrayList<Allotjament> llistaAllotjaments){ //aixo cal???? ns perque ho he fet
         this.llistaAllotjaments = llistaAllotjaments;
@@ -16,6 +17,15 @@ public class LlistaAllotjaments implements InLlistaAllotjaments, Serializable {
 
     public LlistaAllotjaments() {
         llistaAllotjaments = new ArrayList<>();
+        numElements = 0;
+    }
+
+    public int getNumElements() {
+        return numElements;
+    }
+
+    public Allotjament get(int i){
+        return llistaAllotjaments.get(i);
     }
 
     /**
@@ -28,6 +38,7 @@ public class LlistaAllotjaments implements InLlistaAllotjaments, Serializable {
     @Override
     public void afegirAllotjament(Allotjament allotjament){ // throws ExcepcioCamping
         llistaAllotjaments.add(allotjament);
+        numElements++;
     }
 
     /**
@@ -36,6 +47,7 @@ public class LlistaAllotjaments implements InLlistaAllotjaments, Serializable {
     @Override
     public void buidar() {
         llistaAllotjaments.clear();
+        numElements = 0;
     }
 
     /**
@@ -50,7 +62,8 @@ public class LlistaAllotjaments implements InLlistaAllotjaments, Serializable {
         while(it.hasNext()) {
             Allotjament a = it.next();
             String nom = a.getNom();
-            resultat.append(nom);
+            String id = a.getId();
+            resultat.append(nom).append(" - ").append(id);
             if(it.hasNext()){
                 resultat.append(", ");
             }
@@ -75,7 +88,8 @@ public class LlistaAllotjaments implements InLlistaAllotjaments, Serializable {
             Allotjament a = it.next();
             if((estat.equalsIgnoreCase("Operatiu")&&a.isOperatiu()) || estat.equalsIgnoreCase("No operatiu")&&!a.isOperatiu()){
                 String nom = a.getNom();
-                resultat.append(nom);
+                String id = a.getId();
+                resultat.append(nom).append(" - ").append(id);
                 if(it.hasNext()){
                     resultat.append(", ");
                 }

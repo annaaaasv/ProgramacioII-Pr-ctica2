@@ -103,7 +103,8 @@ public class Camping implements InCamping, Serializable {
         if(allotjament == null){
             throw new ExcepcioCamping("No existeix un allotjament amb aquest id");
         }
-        else if(!tipus.equals("Neteja") && !tipus.equals("Reparació") && !tipus.equals("RevisioTecnica") && !tipus.equals("Desinfeccio")){
+        else if(!tipus.equalsIgnoreCase("Neteja") && !tipus.equalsIgnoreCase("Reparació") && !tipus.equalsIgnoreCase("RevisioTecnica")
+                && !tipus.equalsIgnoreCase("Desinfeccio")){
             throw new ExcepcioCamping("Tipus de tasca de manteniment no vàlid");
         }
         else if(dies < 0){
@@ -114,6 +115,7 @@ public class Camping implements InCamping, Serializable {
         }*/
         try {
             llistaTasquesManteniment.afegirTascaManteniment(num, tipus, allotjament, data, dies);
+            llistaAccessos.actualitzaEstatAccessos();
         }catch(ExcepcioCamping e){
             System.out.println(e.getMessage());
         }
@@ -133,6 +135,7 @@ public class Camping implements InCamping, Serializable {
         }
         try {
             llistaTasquesManteniment.completarTascaManteniment(tasca);
+            llistaAccessos.actualitzaEstatAccessos();
         }catch(ExcepcioCamping e){
             System.out.println(e.getMessage());
         }

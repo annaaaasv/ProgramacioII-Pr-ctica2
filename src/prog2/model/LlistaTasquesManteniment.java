@@ -32,7 +32,12 @@ public class LlistaTasquesManteniment implements InLlistaTasquesManteniment, Ser
         if(!allotjament.isOperatiu()){
             throw new ExcepcioCamping("L'allotjament ja té una tasca");
         }
-        TascaManteniment.TipusTascaManteniment _tipus = TascaManteniment.TipusTascaManteniment.valueOf(tipus);
+        for (TascaManteniment t : llistaTasquesManteniment) {
+            if (t.getNum() == num) {
+                throw new ExcepcioCamping("Ja existeix una tasca amb aquest número");
+            }
+        }
+        TascaManteniment.TipusTascaManteniment _tipus = TascaManteniment.TipusTascaManteniment.valueOf(tipus.toUpperCase());
         TascaManteniment tascaManteniment = new TascaManteniment(num, _tipus, allotjament, data, dies);
         llistaTasquesManteniment.add(tascaManteniment);
         allotjament.setOperatiu(false);

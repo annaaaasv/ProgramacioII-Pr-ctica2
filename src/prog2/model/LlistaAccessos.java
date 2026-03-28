@@ -66,10 +66,26 @@ public class LlistaAccessos implements InLlistaAccessos, Serializable {
      *
      * @throws ExcepcioCamping Aquest mètode podria llançar una excepció si fos necessari.
      */
-    //NO SÉ COM S'HA DE FER AQUEST
     @Override
     public void actualitzaEstatAccessos() throws ExcepcioCamping {
-
+        Iterator<Acces> it = llistaAccessos.iterator();
+        while(it.hasNext()) {
+            Acces a = it.next();
+            boolean algunOperatiu = false;
+            for(int i = 0; i < a.getAllotjaments().getNumElements(); i++){
+                Allotjament all = a.getAllotjaments().get(i);
+                if(all.isOperatiu()){
+                    algunOperatiu = true;
+                    break;
+                }
+            }
+            if(algunOperatiu){
+                a.obrirAcces();
+            }
+            else{
+                a.tancarAcces();
+            }
+        }
     }
 
     /**

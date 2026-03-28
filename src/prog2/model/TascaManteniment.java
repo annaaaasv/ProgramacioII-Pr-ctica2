@@ -19,10 +19,10 @@ public class TascaManteniment implements InTascaManteniment, Serializable {
     }
 
     public static enum TipusTascaManteniment{
-        Reparacio,
-        Neteja,
-        RevisioTecnica,
-        Desinfeccio
+        REPARACIO,
+        NETEJA,
+        REVISIOTECNICA,
+        DESINFECCIO
     };
 
     /**
@@ -134,9 +134,9 @@ public class TascaManteniment implements InTascaManteniment, Serializable {
     @Override
     public String getIluminacioAllotjament() {
         return switch (tipus) {
-            case Reparacio, RevisioTecnica -> "50%";
-            case Neteja -> "100%";
-            case Desinfeccio -> "0%";
+            case REPARACIO, REVISIOTECNICA -> "50%";
+            case NETEJA -> "100%";
+            case DESINFECCIO -> "0%";
         };
     }
 

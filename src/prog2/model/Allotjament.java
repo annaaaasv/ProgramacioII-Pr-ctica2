@@ -67,13 +67,13 @@ public abstract class Allotjament implements InAllotjament, Serializable {
     public void tancarAllotjament(TascaManteniment tasca) {
         operatiu = false;
         switch(tasca.getTipus()){
-            case Reparacio, RevisioTecnica:
+            case REPARACIO, REVISIOTECNICA:
                 iluminacio = "50%";
                 break;
-            case Neteja:
+            case NETEJA:
                 iluminacio = "100%";
                 break;
-            case Desinfeccio:
+            case DESINFECCIO:
                 iluminacio = "0%";
                 break;
         }
